@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Notes</title>
+</head>
+<body>
+    <br>
+    <h1>Add Note:</h1>
+    <br>
+    <!--/*@thymesVar id="newNote" type="pl.pbs.edu.zpo.notatki_lab6.Note"*/-->
+    <form th:action="@{/addNote}" th:object="${newNote}" method="POST">
+        <table>
+            <tr>
+                <td>Importance</td>
+                <td><select name="importance">
+                    <option th:each="importance : ${T(pl.pbs.edu.zpo.notatki_lab6.ImportanceEnum).values()}"
+                            th:value="${importance}" th:text="${importance}"></option>
+                </select></td>
+            </tr>
+            <tr>
+                <td>Your Note:</td>
+                <td><input type="text" name="text" /></td>
+            </tr>
+        </table>
+        <input type="submit" value="Add" />
+    </form>
+    <br>
+    <h1>The list of your notes:</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Importance</th>
+            <th>Timestamp</th>
+            <th>Note</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--/*@thymesVar id="listNotes" type="pl.pbs.edu.zpo.notatki_lab6.Note"*/-->
+        <tr th:each="Notes : ${listNotes}">
+            <td th:text="${Notes.importance}"></td>
+            <td th:text="${Notes.text}"></td>
+            <td th:text="${Notes.timestamp}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+</div>
+</body>
+</html>
